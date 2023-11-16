@@ -28,16 +28,16 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 @RequiredArgsConstructor
 public class WebSecurityConfiguration {
 
-    //private final CORSFilter corsFilter;
+    private final CORSFilter corsFilter;
     private final RoutesHandler routesHandler;
     private final JwtAuthConverter jwtAuthConverter;
 
 
     @Bean
     WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().anyRequest();
-               /* .requestMatchers(routesHandler.technicalEndPoints())
-                .requestMatchers(routesHandler.publicEndpoints());*/
+        return web -> web.ignoring()
+                .requestMatchers(routesHandler.technicalEndPoints())
+                .requestMatchers(routesHandler.publicEndpoints());
     }
 
     @Bean
@@ -49,7 +49,7 @@ public class WebSecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-                //.addFilterBefore(corsFilter, ChannelProcessingFilter.class)
+                .addFilterBefore(corsFilter, ChannelProcessingFilter.class)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/actuator/**").permitAll()
                         .requestMatchers(routesHandler.technicalEndPoints()).permitAll()

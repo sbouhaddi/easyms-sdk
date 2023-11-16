@@ -1,4 +1,4 @@
-/*package com.easyms.security.oauth2.ms.config.security;
+package com.easyms.security.oauth2.ms.config.security;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,7 +30,7 @@ public class CORSFilter implements Filter {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS");
         response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, Authorization, x-xsrf-token");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, Authorization, x-xsrf-token, X-Forwarded-For");
 
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
@@ -44,4 +44,4 @@ public class CORSFilter implements Filter {
     public void destroy() {
         // do nothing
     }
-}*/
+}
