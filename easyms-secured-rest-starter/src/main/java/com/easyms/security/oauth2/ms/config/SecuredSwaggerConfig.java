@@ -1,6 +1,7 @@
 package com.easyms.security.oauth2.ms.config;
 
 
+import com.easyms.rest.autoconfigure.EasyMsAutoConfiguration;
 import com.easyms.rest.ms.config.SwaggerProperties;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.Components;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,6 +20,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration(proxyBeanMethods = false)
 @OpenAPIDefinition
+@AutoConfigureBefore(EasyMsAutoConfiguration.class)
 public class SecuredSwaggerConfig {
 
 
@@ -54,13 +57,5 @@ public class SecuredSwaggerConfig {
                 );
 
     }
-
- /*   @Bean
-    public GroupedOpenApi securedSwaggerSpringMvcPlugin() {
-        return GroupedOpenApi.builder()
-                .group("")
-                .pathsToMatch(properties.getPaths())
-                .build();
-    }*/
 
 }

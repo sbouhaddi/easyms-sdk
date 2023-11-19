@@ -21,3 +21,4 @@ swagger:
   api:
     info:
       title: Easy-ms-Secured
+  paths: /api/**
